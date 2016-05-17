@@ -1,0 +1,29 @@
+{
+  "name": "@pmarrapese/node-boilerplate",
+  "version": "0.0.1",
+  "description": "Base functionality for Node projects.",
+  "private": true,
+  "license": "ISC",
+  "author": {
+    "name": "Paul Marrapese",
+    "email": "paul.marrapese@gmail.com"
+  },
+  "homepage": "https://github.com/pmarrapese/node-boilerplate",
+  "bugs": "https://github.com/pmarrapese/node-boilerplate/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmarrapese/node-boilerplate.git"
+  },
+  "main": "./index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --opts ./test/mocha.opts ./test/"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "lodash": "^4.11.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
