@@ -4,7 +4,7 @@ const Config = require('../').Config;
 
 describe('Config', function() {
   it('should load valid config file', function() {
-    let config = new Config('./test/mocks/config/goodConfig.json');
+    let config = new Config('./test/fixtures/config/goodConfig.json');
 
     config.should.be.a('object');
     config.hello.should.eq('world');
@@ -12,7 +12,7 @@ describe('Config', function() {
 
   it('should not load invalid config file', function() {
     function loadBadConfig() {
-      let config = new Config('./test/mocks/config/badConfig.json');
+      let config = new Config('./test/fixtures/config/badConfig.json');
     }
 
     loadBadConfig.should.throw(/failed to parse/i);
@@ -20,7 +20,7 @@ describe('Config', function() {
 
   it('should not load missing config file', function() {
     function loadBadConfig() {
-      let config = new Config('./test/mocks/config/this-file-should-never-exist.json');
+      let config = new Config('./test/fixtures/config/this-file-should-never-exist.json');
     }
 
     loadBadConfig.should.throw(/failed to read/i);
@@ -29,7 +29,7 @@ describe('Config', function() {
   it('should allow default values to be overridden', function() {
     class TestConfig extends Config {
       get defaultConfigDirectory() {
-        return './test/mocks/config/';
+        return './test/fixtures/config/';
       }
 
       get defaultConfigFilename() {
