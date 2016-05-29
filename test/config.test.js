@@ -8,6 +8,11 @@ const os = require('os');
 
 describe('Config', function() {
   describe('Read', function() {
+    it('should instantiate empty object by default', function() {
+      let config = new Config();
+      config.should.be.a('object');
+    });
+
     it('should instantiate config from object', function() {
       let config = new Config({
         foo: 'bar'
