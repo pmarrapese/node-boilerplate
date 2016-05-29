@@ -3,35 +3,65 @@
 const App = require('../').App;
 
 describe('App', function() {
-  it('should throw exception if no entry point function declared', function() {
+  it('should throw exception if no run function declared', function() {
     function runApp() {
       class TestApp extends App { }
       new TestApp();
     }
 
-    runApp.should.throw(/not a function/i);
+    runApp.should.throw(/no "run" function/i);
   });
 
-  it('should execute entry point function (regular function)', function() {
+  it('should execute before, run, and after in order (regular functions)', function() {
     class TestApp extends App {
+      before() {
+        should.not.exist(this.a);
+        should.not.exist(this.b);
+        should.not.exist(this.c);
+        this.a = true;
+      }
+
       run() {
-        this.ran = true;
+        this.a.should.be.true;
+        should.not.exist(this.b);
+        should.not.exist(this.c);
+        this.b = true;
+      }
+
+      after() {
+        this.a.should.be.true;
+        this.b.should.be.ok;
+        should.not.exist(this.c);
       }
     }
 
-    let app = new TestApp();
-    app.ran.should.be.true;
+    new TestApp();
   });
 
-  it('should execute entry point function (generator)', function() {
+  it('should execute before, run, and after in order (generator functions)', function() {
     class TestApp extends App {
+      *before() {
+        should.not.exist(this.a);
+        should.not.exist(this.b);
+        should.not.exist(this.c);
+        this.a = true;
+      }
+
       *run() {
-        this.ran = true;
+        this.a.should.be.true;
+        should.not.exist(this.b);
+        should.not.exist(this.c);
+        this.b = true;
+      }
+
+      *after() {
+        this.a.should.be.true;
+        this.b.should.be.ok;
+        should.not.exist(this.c);
       }
     }
 
-    let app = new TestApp();
-    app.ran.should.be.true;
+    new TestApp();
   });
 
   it('should log messages', function() {

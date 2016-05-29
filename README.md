@@ -7,8 +7,9 @@ This package provides base functionality for ES6 Node projects.
 ## Usage
 ### App
 The `App` class provides bootstrapping and logging functionality.
-To use, extend the `App` class and implement an entry point function named `run`.
-The entry point function may be a regular function or a generator function (useful for yielding promises).
+To use, extend the `App` class and implement an entry point function named `run`. 
+Additionally, you may define `before` and `after` functions to run immediately before or after `run`. 
+All functions may be regular functions or a generator functions (useful for yielding promises).
 
 #### API
 ##### constructor(_[options]_)
