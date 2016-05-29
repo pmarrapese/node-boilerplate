@@ -65,6 +65,27 @@ describe('Config', function() {
       config.hello.should.eq('world');
       config.foo.should.eq('bar');
     });
+
+    it('should apply default values recursively', function() {
+      class TestConfig extends Config {
+        get defaultConfig() {
+          return {
+            'foo': {
+              'yip': 'yap'
+            }
+          };
+        }
+      }
+
+      let config = new TestConfig({
+        'foo': {
+          'bar': 'baz'
+        }
+      });
+      
+      config.foo.bar.should.eq('baz');
+      config.foo.yip.should.eq('yap');
+    });
   });
 
   describe('Write', function() {
