@@ -60,17 +60,25 @@ new MyApp();
 
 ### Config
 The `Config` class provides JSON file parsing and default configuration functionality.
-To use, instantiate the `Config` class with a file path. The instance will be the merged result of the default configuration (if specified) and the parsed JSON.
+To use, instantiate the `Config` class with a source object or JSON file path. The instance will be the merged result of the default configuration (if specified) and the source object.
+
 
 #### API
-##### constructor(_[path]_)
+##### constructor(_[source]_)
 | Parameter            | Description            |
 |----------------------|------------------------|
-| [path] _{string}_   | Path of configuration JSON file
+| [source] _{object|string}_   | Object or path to JSON file
 
-Instantiate a configuration object from a JSON file.
+Instantiate a configuration object from an object or JSON file.
 
-An absolute or relative path may be provided. Relative paths are relative to the current working directory.
+By default, load `config.json` from the current working directory.
+
+#### parseJSONFile(_[path]_)
+| Parameter            | Description            |
+|----------------------|------------------------|
+| [path] _{string}_   | Path to JSON file
+
+Parse a JSON file.
 
 - If `path` is not provided, load the default file from the default directory.
 - If `path` is provided and is suffixed with a path separator, assume `path` is a directory and load the default file from it.

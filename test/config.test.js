@@ -3,6 +3,15 @@
 const Config = require('../').Config;
 
 describe('Config', function() {
+  it('should instantiate config from object', function() {
+    let config = new Config({
+      foo: 'bar'
+    });
+
+    config.should.be.a('object');
+    config.foo.should.eq('bar');
+  });
+
   it('should load valid config file', function() {
     let config = new Config('./test/fixtures/config/goodConfig.json');
 
@@ -26,7 +35,7 @@ describe('Config', function() {
     loadBadConfig.should.throw(/failed to read/i);
   });
 
-  it('should allow default values to be overridden', function() {
+  it('should allow default values to be overridden and load the default config file', function() {
     class TestConfig extends Config {
       get defaultConfigDirectory() {
         return './test/fixtures/config/';
