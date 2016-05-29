@@ -59,8 +59,8 @@ new MyApp();
 ```
 
 ### Config
-The `Config` class provides JSON file parsing and default configuration functionality.
-To use, instantiate the `Config` class with a source object or JSON file path. The instance will be the merged result of the default configuration (if specified) and the source object.
+The `Config` class provides JSON file parsing/writing and default configuration functionality.
+To use, instantiate the `Config` class with a source object or JSON file path. The instance will be the merged result of the provided configuration and the default configuration (if specified).
 
 
 #### API
@@ -80,9 +80,27 @@ By default, load `config.json` from the current working directory.
 
 Parse a JSON file.
 
-- If `path` is not provided, load the default file from the default directory.
-- If `path` is provided and is suffixed with a path separator, assume `path` is a directory and load the default file from it.
+#### resolveConfigPath(path)
+| Parameter            | Description            |
+|----------------------|------------------------|
+| path _{string}_   | Path to config file
+
+Resolve a configuration file path.
+
+An absolute or relative path may be provided. Relative paths are relative to the current working directory.
+
+- If `path` is not provided, append the default config directory with the default config filename.
+- If `path` is provided and is suffixed with a path separator, assume `path` is a directory and append the default config filename.
 - In any other case, assume `path` is a path to a file.
+
+#### write(_[path]_)
+| Parameter            | Description            |
+|----------------------|------------------------|
+| [path] _{string}_   | Path to JSON file
+
+Write this object as a JSON file.
+
+If `path` is not provided, write to the the file this object was initially loaded from.
 
 ##### defaultConfigDirectory (getter)
 Return the default config directory. (default: current working directory)
