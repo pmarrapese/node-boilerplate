@@ -68,7 +68,7 @@ To use, instantiate the `Config` class with a source object or JSON file path. T
 ##### constructor(_[source]_)
 | Parameter            | Description            |
 |----------------------|------------------------|
-| [source] _{object|string}_   | Object or path to JSON file
+| [source] _{object&#124;string}_   | Object or path to JSON file
 
 Instantiate a configuration object from an object or JSON file.
 

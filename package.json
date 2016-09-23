@@ -1,6 +1,6 @@
 {
   "name": "@pmarrapese/node-boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Base functionality for Node projects.",
   "private": true,
   "license": "ISC",
