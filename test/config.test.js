@@ -99,7 +99,7 @@ describe('Config', function() {
       _.isEmpty(config).should.be.true;
     }
 
-    it('should rewrite loaded config to source', function() {
+    it('should rewrite loaded config to source file', function() {
       let path = './test/fixtures/config/writableConfig.json';
       let config = new Config(path);
       let random = _.random(0, Number.MAX_SAFE_INTEGER);
@@ -110,24 +110,34 @@ describe('Config', function() {
       validateAndReset(path, random);
     });
 
-    it('should write new config to new file', function() {
+    it('should write new config to specified path', function() {
       let random = _.random(0, Number.MAX_SAFE_INTEGER);
       let config = new Config({
         random: random
       });
 
       let tempDir = fs.mkdtempSync(os.tmpdir() + Path.sep);
-      let path = tempDir + Path.sep + 'test.json';
+      let path = Path.join(tempDir, 'test.json');
       let write = () => config.write(path);
 
       write.should.not.throw(Error);
       validateAndReset(path, random);
     });
     
-    it('should not write if path is unavailable', function() {
-      let config = new Config({});
+    it('should write new config to default config path', function() {
+      let random = _.random(0, Number.MAX_SAFE_INTEGER);
+      let config = new Config({
+        random: random
+      });
+
+      config.defaultConfigDirectory.should.eq('.'); // ensure we want to write to the current directory by default
+
+      let tempDir = fs.mkdtempSync(os.tmpdir() + Path.sep);
+      process.chdir(tempDir);
       let write = () => config.write();
-      write.should.throw(/no path provided/i);
+
+      write.should.not.throw(Error);
+      validateAndReset(config.defaultConfigPath, random);
     });
   });
 });
